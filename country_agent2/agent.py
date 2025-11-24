@@ -12,4 +12,7 @@ from google.adk.agents import Agent
 root_agent = Agent(
     name="country_agent",
     model="gemini-2.5-flash",
+    input_schema=CountryInput,
+    output_schema=CapitalInfoOutput,
+    output_key="capital_info",
 )
