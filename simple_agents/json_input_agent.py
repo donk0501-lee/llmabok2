@@ -1,3 +1,4 @@
+import json
 from typing_extensions import override
 from typing import AsyncGenerator
 from google.adk.agents import BaseAgent, InvocationContext
@@ -12,5 +13,8 @@ class JsonInputAgent(BaseAgent):
     async def _run_async_impl(
         self, ctx: InvocationContext
     ) -> AsyncGenerator[Event, None]:
-        yield Event(author=self.name, invocation_id=ctx.invocation_id)
+        text=ctx.user_content.parts[0].text #user input
+        yield Event(author=self.name, invocation_id=ctx.invocation_id,
+            content=ctx.user_content,
+            actions=EventActions(state_delta=json.loads(text)))
 

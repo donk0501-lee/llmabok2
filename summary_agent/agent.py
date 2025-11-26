@@ -11,4 +11,6 @@ summarizer = Agent(
 root_agent = Agent(
     name="summary_agent",
     model="gemini-2.5-flash",
+    instruction="입력에 대한 요약이 필요한 경우 'summarizer' 하위 에이전트를 사용하십시오.",
+    sub_agents=[summarizer],
 )
